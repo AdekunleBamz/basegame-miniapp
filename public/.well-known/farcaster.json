@@ -1,18 +1,40 @@
 {
   "accountAssociation": {
-    "header": "eyJmaWQiOjEsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgxMjM0In0",
-    "payload": "eyJkb21haW4iOiJiYXNlYXJjYWRlLnh5eiJ9",
-    "signature": "MHg..."
+    "header": "PLACEHOLDER_HEADER_TO_BE_SIGNED",
+    "payload": "PLACEHOLDER_PAYLOAD_TO_BE_SIGNED",
+    "signature": "PLACEHOLDER_SIGNATURE_TO_BE_SIGNED"
   },
-  "frame": {
-    "version": "next",
+  "miniapp": {
+    "version": "1",
     "name": "BaseArcade",
+    "description": "Compete in arcade games on Base blockchain. Deposit 0.0001 ETH, play for 7 days, and top scorer wins the entire prize pool!",
     "iconUrl": "https://basearcade.xyz/icon.png",
     "homeUrl": "https://basearcade.xyz",
     "imageUrl": "https://basearcade.xyz/api/og",
-    "buttonTitle": "Play Now",
+    "buttonTitle": "🎮 Play Now",
     "splashImageUrl": "https://basearcade.xyz/splash.png",
-    "splashBackgroundColor": "#1a0b2e",
-    "webhookUrl": "https://basearcade.xyz/api/webhook"
+    "splashBackgroundColor": "#6366f1",
+    "webhookUrl": "https://basearcade.xyz/api/webhook",
+    "subtitle": "Arcade games with crypto prizes",
+    "primaryCategory": "gaming",
+    "tags": [
+      "gaming",
+      "arcade",
+      "base",
+      "competition",
+      "crypto"
+    ],
+    "heroImageUrl": "https://basearcade.xyz/hero.png",
+    "tagline": "Play. Compete. Win crypto prizes on Base.",
+    "ogTitle": "BaseArcade - Blockchain Arcade Games",
+    "ogDescription": "Play arcade games and win crypto prizes. Join the 7-day competition on Base blockchain.",
+    "ogImageUrl": "https://basearcade.xyz/api/og",
+    "requiredChains": [
+      "eip155:8453"
+    ],
+    "requiredCapabilities": [
+      "actions.ready",
+      "wallet.getEthereumProvider"
+    ]
   }
 }
