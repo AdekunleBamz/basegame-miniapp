@@ -99,6 +99,28 @@ body {
   @apply flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-200;
 }
 
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .game-card {
+    @apply p-4;
+  }
+  
+  .btn-primary, .btn-secondary {
+    @apply py-2 px-4 text-sm;
+  }
+}
+
+/* Accessibility */
+*:focus {
+  outline: 2px solid rgba(102, 126, 234, 0.5);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .pulse-win {
   animation: pulse-win 2s ease-in-out infinite;
 }
