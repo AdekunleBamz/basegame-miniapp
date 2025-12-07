@@ -1,0 +1,18 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjEsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgxMjM0In0",
+    "payload": "eyJkb21haW4iOiJiYXNlYXJjYWRlLnh5eiJ9",
+    "signature": "MHg..."
+  },
+  "frame": {
+    "version": "next",
+    "name": "BaseArcade",
+    "iconUrl": "https://basearcade.xyz/icon.png",
+    "homeUrl": "https://basearcade.xyz",
+    "imageUrl": "https://basearcade.xyz/api/og",
+    "buttonTitle": "Play Now",
+    "splashImageUrl": "https://basearcade.xyz/splash.png",
+    "splashBackgroundColor": "#1a0b2e",
+    "webhookUrl": "https://basearcade.xyz/api/webhook"
+  }
+}
