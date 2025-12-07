@@ -1,6 +1,6 @@
 'use client'
 
-import { formatTime, formatEth } from '@/lib/utils'
+import { formatTimeRemaining, formatEther } from '@/lib/utils'
 
 interface GameStatsProps {
   totalPot: bigint
@@ -29,7 +29,7 @@ export default function GameStats({
 
         <div className="text-center p-4 bg-blue-100 dark:bg-blue-900 rounded-lg">
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Prize Pool</p>
-          <p className="text-lg font-bold">{formatEth(totalPot)} ETH</p>
+          <p className="text-lg font-bold">{formatEther(totalPot)} ETH</p>
         </div>
 
         <div className="text-center p-4 bg-green-100 dark:bg-green-900 rounded-lg">
@@ -40,7 +40,7 @@ export default function GameStats({
         <div className="text-center p-4 bg-orange-100 dark:bg-orange-900 rounded-lg">
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Time Left</p>
           <p className="text-lg font-bold">
-            {isGameActive ? formatTime(timeRemaining) : '--'}
+            {isGameActive ? formatTimeRemaining(timeRemaining) : '--'}
           </p>
         </div>
       </div>

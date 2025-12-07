@@ -49,6 +49,23 @@ body {
 }
 
 .leaderboard-item {
+  @apply p-4 rounded-lg bg-white dark:bg-gray-800 hover:shadow-md transition-all duration-300;
+}
+
+.pulse-win {
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(250, 204, 21, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(250, 204, 21, 0.8);
+  }
+}
+
+.leaderboard-item {
   @apply flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-200;
 }
 
