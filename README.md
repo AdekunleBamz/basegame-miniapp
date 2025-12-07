@@ -1,8 +1,10 @@
 # BaseArcade
 
+![BaseArcade](https://img.shields.io/badge/Base-Blockchain-blue) ![Next.js](https://img.shields.io/badge/Next.js-14-black) ![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
+
 A competitive game arcade built on Base blockchain where players deposit 0.0001 ETH to play. After 7 days, the top scorer on the leaderboard wins the entire pot!
 
-## Features
+## ✨ Features
 
 - 🎮 Competitive gameplay with real ETH stakes
 - 🏆 Dynamic leaderboard tracking
@@ -10,10 +12,14 @@ A competitive game arcade built on Base blockchain where players deposit 0.0001 
 - 💰 Winner takes all prize pool
 - 🔗 Built on Base (Ethereum L2)
 - 🎯 Farcaster Frame integration
+- 🎨 Beautiful responsive UI
+- ⚡ Fast and low-cost transactions
 
-## Contract Address
+## 🚀 Contract Address
 
 **Base Mainnet**: `0x0c55c47baC21052F3802a7c92Eb4b536f47A86CC`
+
+[View on BaseScan](https://basescan.org/address/0x0c55c47baC21052F3802a7c92Eb4b536f47A86CC)
 
 ## Getting Started
 
