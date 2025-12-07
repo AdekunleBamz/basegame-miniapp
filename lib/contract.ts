@@ -456,5 +456,5 @@ export const GAME_ARCADE_ABI = [
   }
 ] as const;
 
-export const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`;
+export const CONTRACT_ADDRESS = '0x0c55c47baC21052F3802a7c92Eb4b536f47A86CC' as `0x${string}`;
 export const ENTRY_FEE = '0.0001'; // in ETH
