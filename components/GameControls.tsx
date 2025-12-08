@@ -30,16 +30,23 @@ export default function GameControls({
   // Handle transaction success
   useEffect(() => {
     if (isSuccess) {
+      console.log('Transaction successful, refreshing data...')
+      setIsLoading(false)
       // Immediately call onSuccess to refresh data
       onSuccess()
-      // Wait a bit for the blockchain state to update, then refresh again
-      const timer = setTimeout(() => {
+      // Refresh multiple times to ensure blockchain state is captured
+      const timer1 = setTimeout(() => onSuccess(), 2000)
+      const timer2 = setTimeout(() => onSuccess(), 4000)
+      const timer3 = setTimeout(() => {
         onSuccess()
-        setIsLoading(false)
         reset()
-      }, 3000)
+      }, 6000)
       
-      return () => clearTimeout(timer)
+      return () => {
+        clearTimeout(timer1)
+        clearTimeout(timer2)
+        clearTimeout(timer3)
+      }
     }
   }, [isSuccess, onSuccess, reset])
 

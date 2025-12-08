@@ -30,9 +30,26 @@ export default function GameArcade() {
     args: address ? [address] : undefined,
     query: {
       enabled: !!address,
-      refetchInterval: 5000, // Refetch every 5 seconds
+      refetchInterval: 3000, // Refetch every 3 seconds
+      refetchOnMount: 'always',
+      refetchOnWindowFocus: true,
+      gcTime: 0, // Don't cache
+      staleTime: 0, // Always consider stale
     },
   })
+
+  // Debug logging
+  useEffect(() => {
+    if (playerData) {
+      console.log('Player Data:', {
+        address: (playerData as any)?.[0],
+        score: (playerData as any)?.[1]?.toString(),
+        depositAmount: (playerData as any)?.[2]?.toString(),
+        lastPlayTime: (playerData as any)?.[3]?.toString(),
+        hasPlayed: (playerData as any)?.[4],
+      })
+    }
+  }, [playerData])
 
   const { data: leaderboardData, refetch: refetchLeaderboard } = useReadContract({
     address: CONTRACT_ADDRESS,
