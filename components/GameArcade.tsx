@@ -23,18 +23,16 @@ export default function GameArcade() {
     },
   })
 
-  const { data: playerData, refetch: refetchPlayer, queryKey } = useReadContract({
+  const { data: playerData, refetch: refetchPlayer } = useReadContract({
     address: CONTRACT_ADDRESS,
     abi: GAME_ARCADE_ABI,
     functionName: 'getPlayer',
     args: address ? [address] : undefined,
     query: {
       enabled: !!address,
-      refetchInterval: 2000, // Refetch every 2 seconds
+      refetchInterval: 5000, // Refetch every 5 seconds (avoid rate limits)
       refetchOnMount: 'always',
       refetchOnWindowFocus: true,
-      gcTime: 0, // Don't cache
-      staleTime: 0, // Always consider stale
     },
   })
 
@@ -108,21 +106,6 @@ export default function GameArcade() {
       gameStatus,
     })
   }, [connectedAddr, onChainPlayerAddress, depositAmount, gameStatus])
-
-  // On mount or when address changes, aggressively refresh to catch existing deposits
-  useEffect(() => {
-    if (address && isConnected) {
-      console.log('🔍 Checking existing player data for:', address)
-      // Do immediate refresh burst to catch existing deposits
-      const timers = [0, 500, 1000, 1500, 2000].map(delay =>
-        setTimeout(() => {
-          console.log(`🔄 Initial refresh at +${delay}ms`)
-          refetchPlayer()
-        }, delay)
-      )
-      return () => timers.forEach(clearTimeout)
-    }
-  }, [address, isConnected, refetchPlayer])
 
   const playerScore = (playerData as any)?.[1] || BigInt(0)
 

@@ -30,25 +30,22 @@ export default function GameControls({
   // Handle transaction success
   useEffect(() => {
     if (isSuccess) {
-      console.log('✅ Transaction confirmed on-chain, force refreshing...')
+      console.log('✅ Transaction confirmed, refreshing data...')
       setIsLoading(false)
       // Immediately call onSuccess to refresh data
       onSuccess()
-      // Aggressive refresh pattern: every 1s for 10s to catch RPC propagation
-      const timers = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000].map(delay => 
-        setTimeout(() => {
-          console.log(`🔄 Refresh attempt at +${delay}ms`)
-          onSuccess()
-        }, delay)
-      )
-      
-      const finalTimer = setTimeout(() => {
+      // Refresh 3 more times at 2s intervals (avoid rate limits)
+      const timer1 = setTimeout(() => onSuccess(), 2000)
+      const timer2 = setTimeout(() => onSuccess(), 4000)
+      const timer3 = setTimeout(() => {
+        onSuccess()
         reset()
-      }, 11000)
+      }, 6000)
       
       return () => {
-        timers.forEach(clearTimeout)
-        clearTimeout(finalTimer)
+        clearTimeout(timer1)
+        clearTimeout(timer2)
+        clearTimeout(timer3)
       }
     }
   }, [isSuccess, onSuccess, reset])

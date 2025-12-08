@@ -28,6 +28,6 @@ export const config = createConfig({
   connectors: [miniAppConnector(), ...connectors],
   chains: [base],
   transports: {
-    [base.id]: http(),
+    [base.id]: http('https://base-mainnet.g.alchemy.com/v2/demo'),
   },
 })
