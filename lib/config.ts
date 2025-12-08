@@ -25,7 +25,6 @@ const connectors = connectorsForWallets(
 export const chains = [base] as const
 
 export const config = createConfig({
-  autoConnect: true,
   connectors: [miniAppConnector(), ...connectors],
   chains: [base],
   transports: {

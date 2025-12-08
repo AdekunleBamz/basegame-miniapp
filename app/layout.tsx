@@ -26,6 +26,13 @@ export const metadata: Metadata = {
     description: 'Competitive game arcade on Base blockchain',
     images: ['https://basegame-miniapp.vercel.app/og-image.png'],
   },
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon.png', type: 'image/png' }
+    ],
+    apple: [{ url: '/icon.png' }],
+  },
   other: {
     'fc:frame': 'vNext',
     'fc:frame:image': 'https://basegame-miniapp.vercel.app/api/og',
