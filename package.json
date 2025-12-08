@@ -14,7 +14,6 @@
     "@farcaster/miniapp-sdk": "^0.2.1",
     "@farcaster/miniapp-wagmi-connector": "^1.1.0",
     "@rainbow-me/rainbowkit": "^2.0.0",
-    "@react-native-async-storage/async-storage": "^1.17.13",
     "@tanstack/react-query": "^5.17.0",
     "axios": "^1.6.2",
     "clsx": "^2.0.0",
