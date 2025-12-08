@@ -86,9 +86,24 @@ export default function GameArcade() {
   const totalPlayers = (gameStatus as any)?.[6] || BigInt(0)
 
   // The contract's Player struct is: [playerAddress, score, depositAmount, lastPlayTime, hasPlayed]
-  // Use `depositAmount` (index 2) as the indicator that a user has joined (paid the entry fee).
+  // Use `depositAmount` (index 2) as the indicator that a user has joined (paid the entry fee),
+  // but also ensure the on-chain player address matches the connected wallet address.
   const depositAmount = (playerData as any)?.[2] ?? BigInt(0)
-  const hasJoined = depositAmount > BigInt(0)
+  const onChainPlayerAddress = ((playerData as any)?.[0] || '').toString().toLowerCase()
+  const connectedAddr = (address || '').toString().toLowerCase()
+  const hasJoined = depositAmount > BigInt(0) && onChainPlayerAddress === connectedAddr
+
+  // Console debug (non-UI) to help diagnose mismatched addresses or stale reads.
+  // This prints only to the browser console and helps confirm whether the
+  // connected wallet address matches the on-chain player record.
+  useEffect(() => {
+    console.debug('GameArcade debug:', {
+      connectedAddr,
+      onChainPlayerAddress,
+      depositAmount: depositAmount?.toString?.() ?? String(depositAmount),
+      gameStatus,
+    })
+  }, [connectedAddr, onChainPlayerAddress, depositAmount, gameStatus])
   const playerScore = (playerData as any)?.[1] || BigInt(0)
 
   return (
