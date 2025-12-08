@@ -1,23 +1,21 @@
 'use client'
 
-import { WagmiProvider, createConfig, http } from 'wagmi'
-import { base } from 'wagmi/chains'
+import { useEffect } from 'react'
+import { WagmiProvider } from 'wagmi'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { RainbowKitProvider, getDefaultConfig } from '@rainbow-me/rainbowkit'
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
+import { config } from '@/lib/config'
+import { sdk } from '@farcaster/miniapp-sdk'
 import '@rainbow-me/rainbowkit/styles.css'
-
-const config = getDefaultConfig({
-  appName: 'BaseArcade',
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'YOUR_PROJECT_ID',
-  chains: [base],
-  transports: {
-    [base.id]: http(),
-  },
-})
 
 const queryClient = new QueryClient()
 
 export function Providers({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    // Initialize Farcaster SDK when app loads
+    sdk.actions.ready()
+  }, [])
+
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
