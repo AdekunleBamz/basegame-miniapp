@@ -49,6 +49,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta property="fc:frame" content="vNext" />
+        <meta property="fc:frame:image" content="https://basegame-miniapp.vercel.app/og-image.png" />
+        <meta property="fc:frame:button:1" content="Play Now" />
+        <meta property="fc:frame:button:1:action" content="link" />
+        <meta property="fc:frame:button:1:target" content="https://basegame-miniapp.vercel.app" />
+        <meta property="og:image" content="https://basegame-miniapp.vercel.app/og-image.png" />
+      </head>
       <body className={inter.className}>
         <Providers>
           {children}
