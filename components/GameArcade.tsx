@@ -116,11 +116,29 @@ export default function GameArcade() {
   
   // Fallback check: if player appears in leaderboard, they've joined
   const leaderboard = (leaderboardData as any) || []
+  
+  // Check multiple address formats to handle Farcaster wallet edge cases
+  const normalizeAddress = (addr: string) => {
+    if (!addr) return ''
+    // Remove any prefix and normalize to lowercase
+    return addr.toString().replace(/^0x/i, '').toLowerCase()
+  }
+  
+  const normalizedConnected = normalizeAddress(connectedAddr)
+  
   const isInLeaderboard = leaderboard.some((entry: any) => {
-    const entryAddr = (entry?.[0] || '').toString().toLowerCase()
-    const match = entryAddr === connectedAddr
-    if (connectedAddr) {
-      console.log('Leaderboard check:', { entryAddr, connectedAddr, match })
+    const entryAddr = entry?.[0]
+    if (!entryAddr) return false
+    
+    const normalizedEntry = normalizeAddress(entryAddr.toString())
+    const match = normalizedEntry === normalizedConnected
+    
+    if (normalizedConnected) {
+      console.log('Leaderboard check:', { 
+        entryAddr: '0x' + normalizedEntry, 
+        connectedAddr: '0x' + normalizedConnected, 
+        match 
+      })
     }
     return match
   })
