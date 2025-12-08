@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect } from 'react'
-import { WagmiProvider } from 'wagmi'
+import { WagmiConfig } from 'wagmi'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
-import { config } from '@/lib/config'
+import { config, chains } from '@/lib/config'
 import { sdk } from '@farcaster/miniapp-sdk'
 import '@rainbow-me/rainbowkit/styles.css'
 
@@ -17,12 +17,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <WagmiProvider config={config}>
+    <WagmiConfig config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
+        <RainbowKitProvider chains={chains}>
           {children}
         </RainbowKitProvider>
       </QueryClientProvider>
-    </WagmiProvider>
+    </WagmiConfig>
   )
 }
