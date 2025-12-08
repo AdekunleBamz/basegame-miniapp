@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
 import { CONTRACT_ADDRESS, GAME_ARCADE_ABI, ENTRY_FEE } from '@/lib/contract'
 import { parseEther } from 'viem'
@@ -21,11 +21,31 @@ export default function GameControls({
   const { address } = useAccount()
   const [isLoading, setIsLoading] = useState(false)
 
-  const { writeContract, data: hash } = useWriteContract()
+  const { writeContract, data: hash, error, reset } = useWriteContract()
 
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
     hash,
   })
+
+  // Handle transaction success
+  useEffect(() => {
+    if (isSuccess) {
+      setTimeout(() => {
+        onSuccess()
+        setIsLoading(false)
+        reset()
+      }, 2000)
+    }
+  }, [isSuccess, onSuccess, reset])
+
+  // Handle transaction error
+  useEffect(() => {
+    if (error) {
+      console.error('Transaction error:', error)
+      setIsLoading(false)
+      reset()
+    }
+  }, [error, reset])
 
   const handleJoinGame = async () => {
     if (!address) return
@@ -69,13 +89,6 @@ export default function GameControls({
       console.error('Error claiming prize:', error)
       setIsLoading(false)
     }
-  }
-
-  if (isSuccess) {
-    setTimeout(() => {
-      onSuccess()
-      setIsLoading(false)
-    }, 2000)
   }
 
   return (
