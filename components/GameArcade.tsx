@@ -123,6 +123,15 @@ export default function GameArcade() {
   
   // Combined check: use either method
   const hasJoined = hasJoinedFromPlayer || isInLeaderboard
+  
+  // Get player score: prefer leaderboard data (more reliable) over playerData
+  const playerScoreFromData = (playerData as any)?.[1] || BigInt(0)
+  const playerFromLeaderboard = leaderboard.find((entry: any) => {
+    const entryAddr = (entry?.[0] || '').toString().toLowerCase()
+    return entryAddr === connectedAddr
+  })
+  const playerScoreFromLeaderboard = playerFromLeaderboard?.[1] || BigInt(0)
+  const playerScore = playerScoreFromLeaderboard > BigInt(0) ? playerScoreFromLeaderboard : playerScoreFromData
 
   // Console debug (non-UI) to help diagnose mismatched addresses or stale reads.
   // This prints only to the browser console and helps confirm whether the
@@ -138,8 +147,6 @@ export default function GameArcade() {
       gameStatus,
     })
   }, [connectedAddr, onChainPlayerAddress, depositAmount, hasJoinedFromPlayer, isInLeaderboard, hasJoined, gameStatus])
-
-  const playerScore = (playerData as any)?.[1] || BigInt(0)
 
   return (
     <div className="min-h-screen py-8 px-4">
