@@ -20,6 +20,8 @@ export default function GameArcade() {
     functionName: 'getGameStatus',
     query: {
       refetchInterval: 5000, // Refetch every 5 seconds
+      refetchOnMount: 'always',
+      refetchOnWindowFocus: true,
     },
   })
 
@@ -48,6 +50,21 @@ export default function GameArcade() {
       })
     }
   }, [playerData])
+
+  // Debug game status
+  useEffect(() => {
+    if (gameStatus) {
+      console.log('Game Status:', {
+        isActive: (gameStatus as any)?.[0],
+        gameId: (gameStatus as any)?.[1]?.toString(),
+        endTime: (gameStatus as any)?.[2]?.toString(),
+        totalPot: (gameStatus as any)?.[3]?.toString(),
+        currentLeader: (gameStatus as any)?.[4],
+        topScore: (gameStatus as any)?.[5]?.toString(),
+        totalPlayers: (gameStatus as any)?.[6]?.toString(),
+      })
+    }
+  }, [gameStatus])
 
   const { data: leaderboardData, refetch: refetchLeaderboard } = useReadContract({
     address: CONTRACT_ADDRESS,

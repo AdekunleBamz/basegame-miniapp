@@ -20,6 +20,7 @@ export default function GameControls({
 }: GameControlsProps) {
   const { address } = useAccount()
   const [isLoading, setIsLoading] = useState(false)
+  const [shouldAutoStart, setShouldAutoStart] = useState(false)
 
   const { writeContract, data: hash, error, reset } = useWriteContract()
 
@@ -36,7 +37,17 @@ export default function GameControls({
       onSuccess()
       // Refresh 3 more times at 2s intervals (avoid rate limits)
       const timer1 = setTimeout(() => onSuccess(), 2000)
-      const timer2 = setTimeout(() => onSuccess(), 4000)
+      const timer2 = setTimeout(() => {
+        onSuccess()
+        // If we just joined and game isn't active, auto-start it
+        if (shouldAutoStart && !isGameActive) {
+          console.log('🎮 Auto-starting game after join...')
+          setTimeout(() => {
+            handleStartGame()
+            setShouldAutoStart(false)
+          }, 1000)
+        }
+      }, 4000)
       const timer3 = setTimeout(() => {
         onSuccess()
         reset()
@@ -48,7 +59,7 @@ export default function GameControls({
         clearTimeout(timer3)
       }
     }
-  }, [isSuccess, onSuccess, reset])
+  }, [isSuccess, onSuccess, reset, shouldAutoStart, isGameActive])
 
   // Handle transaction error
   useEffect(() => {
@@ -89,6 +100,26 @@ export default function GameControls({
     }
   }
 
+  const handleJoinAndStart = async () => {
+    if (!address) return
+    setIsLoading(true)
+    setShouldAutoStart(true) // Flag to auto-start after join confirms
+    try {
+      // First join the game
+      writeContract({
+        address: CONTRACT_ADDRESS,
+        abi: GAME_ARCADE_ABI,
+        functionName: 'joinGame',
+        value: parseEther(ENTRY_FEE),
+      })
+      // After join confirms, start will be triggered via useEffect
+    } catch (error) {
+      console.error('Error joining game:', error)
+      setIsLoading(false)
+      setShouldAutoStart(false)
+    }
+  }
+
   const handleClaimPrize = async () => {
     setIsLoading(true)
     try {
@@ -107,17 +138,34 @@ export default function GameControls({
     <div className="game-card">
       <h2 className="text-2xl font-bold mb-4">Game Controls</h2>
 
-      {!isGameActive ? (
+      {!isGameActive && !hasJoined ? (
+        <div className="text-center py-8">
+          <div className="mb-6">
+            <p className="text-lg font-semibold mb-2">Entry Fee</p>
+            <p className="text-4xl font-bold text-base-blue">{ENTRY_FEE} ETH</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+              Pay to join and start playing immediately
+            </p>
+          </div>
+          <button
+            onClick={handleJoinAndStart}
+            disabled={isLoading || isConfirming}
+            className="btn-primary"
+          >
+            {isLoading || isConfirming ? '⏳ Processing...' : '🎯 Pay & Play'}
+          </button>
+        </div>
+      ) : !isGameActive && hasJoined ? (
         <div className="text-center py-8">
           <p className="text-lg mb-6 text-gray-600 dark:text-gray-400">
-            No active game. Start a new game to begin playing!
+            You've paid! Starting the game...
           </p>
           <button
             onClick={handleStartGame}
             disabled={isLoading || isConfirming}
             className="btn-primary"
           >
-            {isLoading || isConfirming ? '⏳ Starting...' : '🎮 Start New Game'}
+            {isLoading || isConfirming ? '⏳ Starting...' : '🎮 Start Game Now'}
           </button>
         </div>
       ) : !hasJoined ? (
