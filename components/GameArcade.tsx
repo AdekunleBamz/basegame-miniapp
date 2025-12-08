@@ -118,7 +118,11 @@ export default function GameArcade() {
   const leaderboard = (leaderboardData as any) || []
   const isInLeaderboard = leaderboard.some((entry: any) => {
     const entryAddr = (entry?.[0] || '').toString().toLowerCase()
-    return entryAddr === connectedAddr
+    const match = entryAddr === connectedAddr
+    if (connectedAddr) {
+      console.log('Leaderboard check:', { entryAddr, connectedAddr, match })
+    }
+    return match
   })
   
   // Combined check: use either method
