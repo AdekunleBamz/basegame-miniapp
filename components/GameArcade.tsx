@@ -110,7 +110,19 @@ export default function GameArcade() {
   const depositAmount = (playerData as any)?.[2] ?? BigInt(0)
   const onChainPlayerAddress = ((playerData as any)?.[0] || '').toString().toLowerCase()
   const connectedAddr = (address || '').toString().toLowerCase()
-  const hasJoined = depositAmount > BigInt(0) && onChainPlayerAddress === connectedAddr
+  
+  // Primary check: deposit amount from getPlayer
+  const hasJoinedFromPlayer = depositAmount > BigInt(0) && onChainPlayerAddress === connectedAddr
+  
+  // Fallback check: if player appears in leaderboard, they've joined
+  const leaderboard = (leaderboardData as any) || []
+  const isInLeaderboard = leaderboard.some((entry: any) => {
+    const entryAddr = (entry?.[0] || '').toString().toLowerCase()
+    return entryAddr === connectedAddr
+  })
+  
+  // Combined check: use either method
+  const hasJoined = hasJoinedFromPlayer || isInLeaderboard
 
   // Console debug (non-UI) to help diagnose mismatched addresses or stale reads.
   // This prints only to the browser console and helps confirm whether the
@@ -120,9 +132,12 @@ export default function GameArcade() {
       connectedAddr,
       onChainPlayerAddress,
       depositAmount: depositAmount?.toString?.() ?? String(depositAmount),
+      hasJoinedFromPlayer,
+      isInLeaderboard,
+      hasJoined,
       gameStatus,
     })
-  }, [connectedAddr, onChainPlayerAddress, depositAmount, gameStatus])
+  }, [connectedAddr, onChainPlayerAddress, depositAmount, hasJoinedFromPlayer, isInLeaderboard, hasJoined, gameStatus])
 
   const playerScore = (playerData as any)?.[1] || BigInt(0)
 
