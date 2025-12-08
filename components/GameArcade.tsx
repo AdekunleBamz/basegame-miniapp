@@ -9,6 +9,7 @@ import Leaderboard from './Leaderboard'
 import GameControls from './GameControls'
 import GameStats from './GameStats'
 import ArcadeGame from './ArcadeGame'
+import DebugPanel from './DebugPanel'
 
 export default function GameArcade() {
   const { address, isConnected } = useAccount()
@@ -93,6 +94,7 @@ export default function GameArcade() {
 
   return (
     <div className="min-h-screen py-8 px-4">
+      <DebugPanel address={address} playerData={playerData} gameStatus={gameStatus} onRefresh={refreshData} />
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
