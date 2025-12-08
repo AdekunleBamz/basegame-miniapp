@@ -120,7 +120,7 @@ export default function GameArcade() {
 
               {hasJoined && isGameActive && (
                 <ArcadeGame
-                  playerScore={Number(playerScore)}
+                  currentScore={Number(playerScore)}
                   onScoreUpdate={refreshData}
                 />
               )}
