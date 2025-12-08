@@ -18,6 +18,9 @@ export default function GameArcade() {
     address: CONTRACT_ADDRESS,
     abi: GAME_ARCADE_ABI,
     functionName: 'getGameStatus',
+    query: {
+      refetchInterval: 5000, // Refetch every 5 seconds
+    },
   })
 
   const { data: playerData, refetch: refetchPlayer } = useReadContract({
@@ -25,12 +28,19 @@ export default function GameArcade() {
     abi: GAME_ARCADE_ABI,
     functionName: 'getPlayer',
     args: address ? [address] : undefined,
+    query: {
+      enabled: !!address,
+      refetchInterval: 5000, // Refetch every 5 seconds
+    },
   })
 
   const { data: leaderboardData, refetch: refetchLeaderboard } = useReadContract({
     address: CONTRACT_ADDRESS,
     abi: GAME_ARCADE_ABI,
     functionName: 'getLeaderboard',
+    query: {
+      refetchInterval: 10000, // Refetch every 10 seconds
+    },
   })
 
   useEffect(() => {
