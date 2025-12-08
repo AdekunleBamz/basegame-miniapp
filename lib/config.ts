@@ -23,7 +23,7 @@ const connectors = connectorsForWallets(
 )
 
 export const config = createConfig({
-  connectors: [...connectors(), miniAppConnector()],
+  connectors: [miniAppConnector(), ...connectors],
   chains: [base],
   transports: {
     [base.id]: http(),
