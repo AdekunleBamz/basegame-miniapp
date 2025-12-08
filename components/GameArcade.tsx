@@ -52,13 +52,13 @@ export default function GameArcade() {
     refetchLeaderboard()
   }
 
-  const isGameActive = gameStatus?.[0] || false
-  const totalPot = gameStatus?.[3] || BigInt(0)
-  const currentLeader = gameStatus?.[4] || ''
-  const topScore = gameStatus?.[5] || BigInt(0)
-  const totalPlayers = gameStatus?.[6] || BigInt(0)
-  const hasJoined = playerData?.[4] || false
-  const playerScore = playerData?.[1] || BigInt(0)
+  const isGameActive = (gameStatus as any)?.[0] || false
+  const totalPot = (gameStatus as any)?.[3] || BigInt(0)
+  const currentLeader = (gameStatus as any)?.[4] || ''
+  const topScore = (gameStatus as any)?.[5] || BigInt(0)
+  const totalPlayers = (gameStatus as any)?.[6] || BigInt(0)
+  const hasJoined = (playerData as any)?.[4] || false
+  const playerScore = (playerData as any)?.[1] || BigInt(0)
 
   return (
     <div className="min-h-screen py-8 px-4">
