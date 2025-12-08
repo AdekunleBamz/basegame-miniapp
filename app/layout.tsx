@@ -55,17 +55,17 @@ export default function RootLayout({
         {/* Open Graph - Required for Farcaster */}
         <meta property="og:title" content="BaseArcade" />
         <meta property="og:description" content="Play arcade games and win crypto prizes on Base blockchain" />
-        <meta property="og:image" content="https://basegame-miniapp.vercel.app/hero.png" />
+        <meta property="og:image" content="https://basegame-miniapp.vercel.app/og-1200x630.png" />
         <meta property="og:url" content="https://basegame-miniapp.vercel.app" />
         <meta property="og:type" content="website" />
         
         {/* Twitter Card */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:image" content="https://basegame-miniapp.vercel.app/hero.png" />
+        <meta property="twitter:image" content="https://basegame-miniapp.vercel.app/og-1200x630.png" />
         
         {/* Farcaster Frame Meta Tags */}
         <meta name="fc:frame" content="vNext" />
-        <meta name="fc:frame:image" content="https://basegame-miniapp.vercel.app/hero.png" />
+        <meta name="fc:frame:image" content="https://basegame-miniapp.vercel.app/og-1200x630.png" />
       </head>
       <body className={inter.className}>
         <Providers>
