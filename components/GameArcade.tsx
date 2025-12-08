@@ -84,7 +84,11 @@ export default function GameArcade() {
   const currentLeader = (gameStatus as any)?.[4] || ''
   const topScore = (gameStatus as any)?.[5] || BigInt(0)
   const totalPlayers = (gameStatus as any)?.[6] || BigInt(0)
-  const hasJoined = (playerData as any)?.[4] || false
+
+  // The contract's Player struct is: [playerAddress, score, depositAmount, lastPlayTime, hasPlayed]
+  // Use `depositAmount` (index 2) as the indicator that a user has joined (paid the entry fee).
+  const depositAmount = (playerData as any)?.[2] ?? BigInt(0)
+  const hasJoined = depositAmount > BigInt(0)
   const playerScore = (playerData as any)?.[1] || BigInt(0)
 
   return (
