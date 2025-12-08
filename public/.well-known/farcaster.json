@@ -28,7 +28,7 @@
     "tagline": "Play. Compete. Win crypto.",
     "ogTitle": "BaseArcade",
     "ogDescription": "Play arcade games and win crypto prizes. Join the 7-day competition on Base blockchain.",
-    "ogImageUrl": "https://basegame-miniapp.vercel.app/api/og",
+    "ogImageUrl": "https://basegame-miniapp.vercel.app/og-image.png",
     "requiredChains": [
       "eip155:8453"
     ],
