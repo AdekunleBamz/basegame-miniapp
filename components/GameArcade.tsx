@@ -23,14 +23,14 @@ export default function GameArcade() {
     },
   })
 
-  const { data: playerData, refetch: refetchPlayer } = useReadContract({
+  const { data: playerData, refetch: refetchPlayer, queryKey } = useReadContract({
     address: CONTRACT_ADDRESS,
     abi: GAME_ARCADE_ABI,
     functionName: 'getPlayer',
     args: address ? [address] : undefined,
     query: {
       enabled: !!address,
-      refetchInterval: 3000, // Refetch every 3 seconds
+      refetchInterval: 2000, // Refetch every 2 seconds
       refetchOnMount: 'always',
       refetchOnWindowFocus: true,
       gcTime: 0, // Don't cache
@@ -73,10 +73,14 @@ export default function GameArcade() {
     return () => clearInterval(interval)
   }, [gameStatus])
 
-  const refreshData = () => {
-    refetchGameStatus()
-    refetchPlayer()
-    refetchLeaderboard()
+  const refreshData = async () => {
+    console.log('🔄 Force refreshing all data...')
+    await Promise.all([
+      refetchGameStatus(),
+      refetchPlayer(),
+      refetchLeaderboard(),
+    ])
+    console.log('✅ Data refreshed')
   }
 
   const isGameActive = (gameStatus as any)?.[0] || false
