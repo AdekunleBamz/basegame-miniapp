@@ -50,12 +50,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta property="fc:frame" content="vNext" />
-        <meta property="fc:frame:image" content="https://basegame-miniapp.vercel.app/og-image.png" />
-        <meta property="fc:frame:button:1" content="Play Now" />
-        <meta property="fc:frame:button:1:action" content="link" />
-        <meta property="fc:frame:button:1:target" content="https://basegame-miniapp.vercel.app" />
+        {/* Open Graph tags for embed preview */}
+        <meta property="og:title" content="BaseArcade" />
+        <meta property="og:description" content="Play arcade games and win crypto prizes. Join the 7-day competition on Base blockchain." />
         <meta property="og:image" content="https://basegame-miniapp.vercel.app/og-image.png" />
+        <meta property="og:url" content="https://basegame-miniapp.vercel.app" />
+        <meta property="og:type" content="website" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="BaseArcade" />
+        <meta name="twitter:description" content="Play arcade games and win crypto prizes" />
+        <meta name="twitter:image" content="https://basegame-miniapp.vercel.app/og-image.png" />
       </head>
       <body className={inter.className}>
         <Providers>
