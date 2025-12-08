@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'BaseArcade - Play to Win on Base',
     description: 'Competitive game arcade on Base blockchain',
-    images: ['/og-image.png'],
+    images: ['https://basegame-miniapp.vercel.app/hero.png'],
     type: 'website',
     siteName: 'BaseArcade',
   },
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'BaseArcade - Play to Win on Base',
     description: 'Competitive game arcade on Base blockchain',
-    images: ['/og-image.png'],
+    images: ['https://basegame-miniapp.vercel.app/hero.png'],
   },
   other: {
     'fc:frame': 'vNext',
-    'fc:frame:image': process.env.NEXT_PUBLIC_APP_URL + '/api/og',
+    'fc:frame:image': 'https://basegame-miniapp.vercel.app/api/og',
     'fc:frame:button:1': 'Play Now',
     'fc:frame:button:1:action': 'link',
-    'fc:frame:button:1:target': process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+    'fc:frame:button:1:target': 'https://basegame-miniapp.vercel.app',
   }
 }
 
