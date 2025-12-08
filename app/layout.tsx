@@ -60,7 +60,7 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
         
         {/* Farcaster Mini App - REQUIRED for embed validation */}
-        <meta name="fc:miniapp" content='{"version":"1","imageUrl":"https://basegame-miniapp.vercel.app/og-1200x630.png","button":{"title":"Play BaseArcade","action":{"type":"launch_miniapp","url":"https://basegame-miniapp.vercel.app","splashImageUrl":"https://basegame-miniapp.vercel.app/splash.png","splashBackgroundColor":"#6366f1"}}}' />
+        <meta name="fc:miniapp" content='{"version":"1","imageUrl":"https://basegame-miniapp.vercel.app/og-1200x630.png","button":{"title":"Play BaseArcade","action":{"type":"launch_miniapp","name":"BaseArcade","url":"https://basegame-miniapp.vercel.app","splashImageUrl":"https://basegame-miniapp.vercel.app/splash.png","splashBackgroundColor":"#6366f1"}}}' />
       </head>
       <body className={inter.className}>
         <Providers>
